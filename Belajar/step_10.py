@@ -1,46 +1,33 @@
 # Creating Simple GUI App
-
+from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog, QDialogButtonBox, QFormLayout, QGridLayout,
+                            QGroupBox, QHBoxLayout, QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox,
+                            QTextEdit, QVBoxLayout)
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QFileSystemModel, QTreeView, QVBoxLayout
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
+
 
 #Define Method
-class App(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.title="PyQt5 Simple By Farid"
-        self.left=10
-        self.top=10
-        self.width=640
-        self.height=480
-        self.initUI()
-
+class Dialog(QDialog):
+    NumGridRows = 3
+    NumButtons = 4
     #Define Title
-    def initUI(self):
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left,self.top,self.width,self.height)
-        self.model = QFileSystemModel()
-        self.model.setRootPath('')
-        self.tree = QTreeView()
-        self.tree.setModel(self.model)
-        self.show()
+    def __init__(self):
+        super(Dialog, self).__init__()
+        b1 = QPushButton("Button 1")
+        b2 = QPushButton("Button 2")
+        b3 = QPushButton("Button 3")
+        b4 = QPushButton("Button 4")
 
-        self.tree.setAnimated(False)
-        self.tree.setIndentation(20)
-        self.tree.setSortingEnabled(True)
+        mainLayout = QHBoxLayout()
+        mainLayout.addWidget(b1)
+        mainLayout.addWidget(b2)
+        mainLayout.addWidget(b3)
+        mainLayout.addWidget(b4)
 
-        self.tree.setWindowTitle("DirView by Farid")
-        self.tree.resize(640,480)
-
-        WindowsLayout = QVBoxLayout()
-        WindowsLayout.addWidget(self.tree)
-        self.setLayout(WindowsLayout)
-
-        self.show()
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Form Layout")
 
 #Main method
 if __name__=='__main__':
     app=QApplication(sys.argv)
-    ex=App()
-    sys.exit(app.exec_())
+    dialog=Dialog()
+    sys.exit(dialog.exec_())
